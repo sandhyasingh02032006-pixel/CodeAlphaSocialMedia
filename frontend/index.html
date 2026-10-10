@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeAlphaSocialMedia — Home Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">C</div>
+        <div class="brand-title">CodeAlpha<span style="color: var(--primary-blue);">Social</span></div>
+      </div>
+
+      <ul class="nav-list">
+        <li class="nav-item active"><a href="index.html">🏠 Home Feed</a></li>
+        <li class="nav-item"><a href="explore.html">🔍 Search & Discover</a></li>
+        <li class="nav-item"><a href="create-post.html">📸 Create Media</a></li>
+        <li class="nav-item"><a href="profile.html">👤 My Profile</a></li>
+        <li class="nav-item"><a href="messages.html">💬 Messages & Alerts</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Settings & Theme</a></li>
+      </ul>
+
+      <div style="margin-top: 24px; padding: 0 8px;">
+        <a href="create-post.html" class="btn btn-primary" style="width: 100%;">
+          + Create Post
+        </a>
+      </div>
+
+      <!-- User footer in sidebar -->
+      <div style="margin-top: auto; padding: 12px; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
+          <img id="sidebar-user-avatar" src="/src/assets/images/avatar_tech_dev_1791536907315.jpg" class="avatar avatar-sm" />
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <div id="sidebar-user-name" style="font-weight: 700; font-size: 13px;">Alex Rivers</div>
+            <div id="sidebar-user-handle" style="font-size: 11px; color: var(--text-muted);">@alex_codealpha</div>
+          </div>
+        </div>
+        <button onclick="Auth.logout()" class="btn-ghost btn-sm" title="Log Out" style="padding: 4px;">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main News Feed Stream -->
+    <main class="main-stream">
+      <header class="page-header">
+        <h2 style="font-size: 18px; font-weight: 800;">Home Feed</h2>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn btn-ghost btn-sm filter-tab active" id="filter-tab-all" onclick="Feed.setFilter('all')">All</button>
+          <button class="btn btn-ghost btn-sm filter-tab" id="filter-tab-following" onclick="Feed.setFilter('following')">Following</button>
+          <button class="btn btn-ghost btn-sm filter-tab" id="filter-tab-trending" onclick="Feed.setFilter('trending')">Trending</button>
+        </div>
+      </header>
+
+      <!-- Stories Carousel Strip -->
+      <div class="stories-strip" id="stories-strip">
+        <!-- Rendered by feed.js -->
+      </div>
+
+      <!-- Quick Inline Composer -->
+      <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); background-color: var(--bg-secondary);">
+        <div style="display: flex; gap: 12px;">
+          <img id="composer-avatar" src="/src/assets/images/avatar_tech_dev_1791536907315.jpg" class="avatar" />
+          <div style="flex: 1;">
+            <input type="text" id="quick-composer-text" class="form-input" placeholder="What's happening in tech, AI, and design?" style="margin-bottom: 10px;" />
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 8px;">
+                <a href="create-post.html" class="btn btn-ghost btn-sm" style="color: var(--primary-blue);">
+                  📷 Camera & Editor
+                </a>
+              </div>
+              <button onclick="window.location.href='create-post.html'" class="btn btn-primary btn-sm">
+                Share Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- News Feed Container -->
+      <div id="feed-container" style="padding: 16px 20px;">
+        <!-- Loaded dynamically from /api/posts -->
+      </div>
+    </main>
+
+    <!-- Right Side Widgets Pane -->
+    <aside class="widgets-pane">
+      <div class="card">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Search Entry</h4>
+        <form action="explore.html" method="GET" style="display: flex; gap: 8px;">
+          <input type="text" name="q" class="form-input" placeholder="Search people & tags..." style="padding: 8px 12px; font-size: 13px;" />
+          <button type="submit" class="btn btn-primary btn-sm">🔍</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Camera Shortcut</h4>
+        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+          Launch your webcam or smartphone camera, take instant snapshots, apply cinematic filters, and publish!
+        </p>
+        <a href="create-post.html" class="btn btn-secondary btn-sm" style="width: 100%;">
+          📸 Open Camera & Photo Studio
+        </a>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Trending Topics</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+          <div><a href="explore.html?tag=CodeAlpha" style="color: var(--primary-blue); font-weight: 700;">#CodeAlpha</a> <span style="font-size: 11px; color: var(--text-muted);">(14.2k posts)</span></div>
+          <div><a href="explore.html?tag=DeveloperSetup" style="font-weight: 600;">#DeveloperSetup</a></div>
+          <div><a href="explore.html?tag=MySQL" style="font-weight: 600;">#MySQLDatabase</a></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar (Responsive) -->
+  <nav class="mobile-bottom-bar">
+    <a href="index.html" class="mobile-nav-btn active">🏠<span>Home</span></a>
+    <a href="explore.html" class="mobile-nav-btn">🔍<span>Explore</span></a>
+    <a href="create-post.html" class="mobile-nav-btn">📸<span>Post</span></a>
+    <a href="messages.html" class="mobile-nav-btn">💬<span>Chat</span></a>
+    <a href="profile.html" class="mobile-nav-btn">👤<span>Profile</span></a>
+    <a href="settings.html" class="mobile-nav-btn">⚙️<span>Settings</span></a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/posts.js"></script>
+  <script src="js/feed.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Feed.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeAlphaSocialMedia — Settings & Customization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">C</div>
+        <div class="brand-title">CodeAlpha<span style="color: var(--primary-blue);">Social</span></div>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">🏠 Home Feed</a></li>
+        <li class="nav-item"><a href="explore.html">🔍 Search & Discover</a></li>
+        <li class="nav-item"><a href="create-post.html">📸 Create Media</a></li>
+        <li class="nav-item"><a href="profile.html">👤 My Profile</a></li>
+        <li class="nav-item"><a href="messages.html">💬 Messages & Alerts</a></li>
+        <li class="nav-item active"><a href="settings.html">⚙️ Settings & Theme</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-stream">
+      <header class="page-header">
+        <h2 style="font-size: 18px; font-weight: 800;">Settings & Customization</h2>
+        <button class="btn btn-primary btn-sm" onclick="Settings.savePreferences()">💾 Save to Database</button>
+      </header>
+
+      <div style="padding: 24px 20px; display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Live Customization Preview Card -->
+        <div class="card" style="border: 2px solid var(--primary-blue); box-shadow: 0 0 20px rgba(56,189,248,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-weight: 800; font-size: 13px; color: var(--primary-blue); text-transform: uppercase;">Live Typography & Theme Preview</span>
+            <span class="badge" style="position: static; font-size: 11px; background: rgba(56,189,248,0.2); color: var(--primary-blue); border: 1px solid var(--primary-blue); padding: 2px 8px; width: auto; height: auto;">Real-Time</span>
+          </div>
+
+          <div id="settings-live-preview" style="padding: 16px; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: 8px;">The quick brown fox jumps over the lazy dog.</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 12px;">
+              CodeAlphaSocialMedia connects global software developers and visual artists using Sky-Blue interfaces and MySQL scalability.
+            </p>
+            <button id="preview-cta-btn" class="btn btn-primary btn-sm">Sample Action Button</button>
+          </div>
+        </div>
+
+        <!-- Section 1: Font Customization -->
+        <div class="card">
+          <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Font Customization</h3>
+
+          <div class="form-group">
+            <label class="form-label">Font Family (Supported Families)</label>
+            <select id="setting-font-family" class="form-select">
+              <option value="Poppins">Poppins (Modern Geometric Sans)</option>
+              <option value="Inter">Inter (Ultra-Legible Tech Sans)</option>
+              <option value="Roboto">Roboto (Clean Android Modern)</option>
+              <option value="Lato">Lato (Balanced Humanist)</option>
+              <option value="Playfair Display">Playfair Display (Editorial Serif)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between;">
+              <label class="form-label">Font Base Size</label>
+              <span id="setting-font-size-val" style="font-size: 12px; font-weight: 700; color: var(--primary-blue);">15px</span>
+            </div>
+            <input type="range" id="setting-font-size" min="13" max="18" value="15" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Letter Spacing</label>
+            <select id="setting-letter-spacing" class="form-select">
+              <option value="normal">Normal</option>
+              <option value="0.02em">Slightly Wide (+0.02em)</option>
+              <option value="0.05em">Wide (+0.05em)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Section 2: Theme Customization -->
+        <div class="card">
+          <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Theme & Color Customization</h3>
+
+          <div class="form-group">
+            <label class="form-label">Color Theme</label>
+            <select id="setting-theme" class="form-select">
+              <option value="sky-black">Sky Blue & Deep Black (Default Master Theme)</option>
+              <option value="dark">Charcoal Dark Theme</option>
+              <option value="light">Crisp Light Theme</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Accent Color</label>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <input type="color" id="setting-accent-color" value="#38BDF8" style="height: 42px; width: 56px; border: 1px solid var(--border-color); background: none; border-radius: var(--radius-sm); cursor: pointer;" />
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('setting-accent-color').value='#38BDF8'; document.getElementById('setting-accent-color').dispatchEvent(new Event('input'));">Sky Blue</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('setting-accent-color').value='#10B981'; document.getElementById('setting-accent-color').dispatchEvent(new Event('input'));">Emerald</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('setting-accent-color').value='#F59E0B'; document.getElementById('setting-accent-color').dispatchEvent(new Event('input'));">Amber</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('setting-accent-color').value='#EC4899'; document.getElementById('setting-accent-color').dispatchEvent(new Event('input'));">Rose</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="Settings.savePreferences()">Save All Preferences to MySQL</button>
+            <button class="btn btn-secondary" onclick="Settings.resetDefaults()">Reset to Defaults</button>
+          </div>
+        </div>
+
+        <!-- Section 3: Account & Session Management -->
+        <div class="card">
+          <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">Account Session & Actions</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
+            Manage your session credentials and local authentication tokens.
+          </p>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-danger btn-sm" onclick="Auth.logout()">🚪 Sign Out</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <aside class="widgets-pane">
+      <div class="card">
+        <h4 style="font-size: 15px; margin-bottom: 10px;">Preferences in Database</h4>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+          Your selected font family, font size, theme, and accent color are updated in the <code>user_preferences</code> MySQL table with foreign key to <code>users(id)</code>.
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="mobile-bottom-bar">
+    <a href="index.html" class="mobile-nav-btn">🏠<span>Home</span></a>
+    <a href="explore.html" class="mobile-nav-btn">🔍<span>Explore</span></a>
+    <a href="create-post.html" class="mobile-nav-btn">📸<span>Post</span></a>
+    <a href="messages.html" class="mobile-nav-btn">💬<span>Chat</span></a>
+    <a href="profile.html" class="mobile-nav-btn">👤<span>Profile</span></a>
+    <a href="settings.html" class="mobile-nav-btn active">⚙️<span>Settings</span></a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/settings.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Settings.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeAlphaSocialMedia — Messages & Notifications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">C</div>
+        <div class="brand-title">CodeAlpha<span style="color: var(--primary-blue);">Social</span></div>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">🏠 Home Feed</a></li>
+        <li class="nav-item"><a href="explore.html">🔍 Search & Discover</a></li>
+        <li class="nav-item"><a href="create-post.html">📸 Create Media</a></li>
+        <li class="nav-item"><a href="profile.html">👤 My Profile</a></li>
+        <li class="nav-item active"><a href="messages.html">💬 Messages & Alerts</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Settings & Theme</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-stream" style="max-width: 1000px; display: flex; flex-direction: column;">
+      <header class="page-header">
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-ghost btn-sm msg-tab active" id="tab-btn-chat" onclick="switchView('chat')">💬 Direct Messages</button>
+          <button class="btn btn-ghost btn-sm msg-tab" id="tab-btn-notifs" onclick="switchView('notifs')">🔔 Notifications Stream</button>
+        </div>
+      </header>
+
+      <!-- View 1: Real-Time Chat Layout -->
+      <div id="view-chat" class="chat-layout">
+        <!-- Thread list -->
+        <div class="chat-threads">
+          <div style="padding: 14px 16px; border-bottom: 1px solid var(--border-color); font-weight: 700; font-size: 14px;">
+            Conversations
+          </div>
+          <div id="conversations-list">
+            <!-- Loaded by messages.js -->
+          </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+          <div id="chat-active-header" style="padding: 12px 18px; border-bottom: 1px solid var(--border-color); background: var(--bg-secondary);">
+            <div style="font-size: 13px; color: var(--text-muted);">Select a conversation to start chatting</div>
+          </div>
+
+          <!-- Typing indicator bar -->
+          <div id="chat-typing-indicator" style="display: none; padding: 4px 18px; font-size: 11px; color: var(--primary-blue); background: var(--bg-secondary);">
+            Typing...
+          </div>
+
+          <!-- Messages Stream -->
+          <div class="messages-stream" id="messages-stream">
+            <div style="text-align: center; color: var(--text-muted); font-size: 13px; margin: auto;">
+              No chat selected
+            </div>
+          </div>
+
+          <!-- Input Bar -->
+          <form class="chat-input-bar" onsubmit="event.preventDefault(); submitChatMessage();">
+            <input type="text" id="chat-msg-input" class="form-input" placeholder="Write message..." oninput="Messages.handleTyping()" />
+            <button type="button" class="btn btn-ghost btn-sm" onclick="addEmoji('✨')">✨</button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="addEmoji('🚀')">🚀</button>
+            <button type="submit" class="btn btn-primary btn-sm">Send</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- View 2: Notifications List -->
+      <div id="view-notifs" style="display: none; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 16px; font-weight: 700;">Activity & Notifications</h3>
+          <button class="btn btn-secondary btn-sm" onclick="Notifications.markAllRead()">Mark All as Read</button>
+        </div>
+        <div id="notifications-stream" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Loaded by notifications.js -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="mobile-bottom-bar">
+    <a href="index.html" class="mobile-nav-btn">🏠<span>Home</span></a>
+    <a href="explore.html" class="mobile-nav-btn">🔍<span>Explore</span></a>
+    <a href="create-post.html" class="mobile-nav-btn">📸<span>Post</span></a>
+    <a href="messages.html" class="mobile-nav-btn active">💬<span>Chat</span></a>
+    <a href="profile.html" class="mobile-nav-btn">👤<span>Profile</span></a>
+    <a href="settings.html" class="mobile-nav-btn">⚙️<span>Settings</span></a>
+  </nav>
+
+  <!-- Socket.IO library from server -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/messages.js"></script>
+  <script src="js/notifications.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Messages.init();
+      Notifications.loadNotifications();
+    });
+
+    function switchView(view) {
+      document.getElementById('view-chat').style.display = view === 'chat' ? 'flex' : 'none';
+      document.getElementById('view-notifs').style.display = view === 'notifs' ? 'block' : 'none';
+
+      document.getElementById('tab-btn-chat').classList.toggle('active', view === 'chat');
+      document.getElementById('tab-btn-notifs').classList.toggle('active', view === 'notifs');
+
+      if (view === 'notifs') {
+        Notifications.loadNotifications();
+      }
+    }
+
+    function addEmoji(emoji) {
+      const input = document.getElementById('chat-msg-input');
+      input.value += emoji;
+      input.focus();
+    }
+
+    function submitChatMessage() {
+      const input = document.getElementById('chat-msg-input');
+      const text = input.value.trim();
+      if (!text) return;
+      Messages.sendMessage(text);
+      input.value = '';
+    }
+  </script>
+</body>
+</html>

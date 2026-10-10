@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeAlphaSocialMedia — User Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">C</div>
+        <div class="brand-title">CodeAlpha<span style="color: var(--primary-blue);">Social</span></div>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">🏠 Home Feed</a></li>
+        <li class="nav-item"><a href="explore.html">🔍 Search & Discover</a></li>
+        <li class="nav-item"><a href="create-post.html">📸 Create Media</a></li>
+        <li class="nav-item active"><a href="profile.html">👤 My Profile</a></li>
+        <li class="nav-item"><a href="messages.html">💬 Messages & Alerts</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Settings & Theme</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-stream">
+      <header class="page-header">
+        <h2 style="font-size: 18px; font-weight: 800;">User Profile</h2>
+        <a href="settings.html" class="btn btn-ghost btn-sm" title="Settings">⚙️</a>
+      </header>
+
+      <!-- Profile Header Area -->
+      <div id="profile-header" style="padding: 20px;">
+        <p style="color: var(--text-muted); text-align: center;">Loading profile data...</p>
+      </div>
+
+      <!-- Profile Tabs -->
+      <div style="display: flex; border-bottom: 1px solid var(--border-color); padding: 0 20px;">
+        <button class="btn btn-ghost profile-tab active" id="tab-posts" onclick="Profile.setTab('posts')" style="border-radius: 0; border-bottom: 2px solid var(--primary-blue); font-weight: 700; padding: 12px 20px;">
+          📰 Posts
+        </button>
+        <button class="btn btn-ghost profile-tab" id="tab-saved" onclick="Profile.setTab('saved')" style="border-radius: 0; font-weight: 700; padding: 12px 20px;">
+          🔖 Saved (Private)
+        </button>
+      </div>
+
+      <!-- Posts Stream -->
+      <div id="profile-posts-stream" style="padding: 20px;">
+        <!-- Loaded by profile.js -->
+      </div>
+    </main>
+
+    <aside class="widgets-pane">
+      <div class="card">
+        <h4 style="font-size: 15px; margin-bottom: 10px;">Privacy & Permissions</h4>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+          Saved posts are strictly private and only visible to the logged-in owner. Private accounts require explicit follow approval before public posts are revealed.
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="mobile-bottom-bar">
+    <a href="index.html" class="mobile-nav-btn">🏠<span>Home</span></a>
+    <a href="explore.html" class="mobile-nav-btn">🔍<span>Explore</span></a>
+    <a href="create-post.html" class="mobile-nav-btn">📸<span>Post</span></a>
+    <a href="messages.html" class="mobile-nav-btn">💬<span>Chat</span></a>
+    <a href="profile.html" class="mobile-nav-btn active">👤<span>Profile</span></a>
+    <a href="settings.html" class="mobile-nav-btn">⚙️<span>Settings</span></a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/posts.js"></script>
+  <script src="js/profile.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Profile.init();
+    });
+  </script>
+</body>
+</html>

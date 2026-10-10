@@ -1,0 +1,67 @@
+/* ====================================================================
+   CodeAlphaSocialMedia — Responsive Layouts
+   ==================================================================== */
+
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(8, 11, 16, 0.96);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--border-color);
+  padding: 8px 12px;
+  justify-content: space-around;
+  z-index: 90;
+}
+
+.mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.mobile-nav-btn.active {
+  color: var(--primary-blue);
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: #EF4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1120px) {
+  .widgets-pane {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .sidebar {
+    display: none;
+  }
+  .main-stream {
+    border-right: none;
+    max-width: 100%;
+    margin-bottom: 70px;
+  }
+  .mobile-bottom-bar {
+    display: flex;
+  }
+}
