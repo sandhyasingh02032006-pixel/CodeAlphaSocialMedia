@@ -1,5 +1,5 @@
 /**
- * CodeAlphaSocialMedia — Master API Client
+ * CodeAlphaSocialMedia - Master API Client
  */
 
 const API_BASE = 'https://codealphasocialmedia.onrender.com/api';
@@ -24,11 +24,11 @@ const API = {
   },
 
   getCurrentUser() {
-    const raw = localStorage.getItem('codealpha_user');
-
     try {
-      return raw ? JSON.parse(raw) : null;
-    } catch {
+      const user = localStorage.getItem('codealpha_user');
+      return user ? JSON.parse(user) : null;
+    } catch (error) {
+      console.error('Unable to read user:', error);
       return null;
     }
   },
@@ -36,7 +36,10 @@ const API = {
   async request(endpoint, options = {}) {
     const url = `${API_BASE}${endpoint}`;
     const token = this.getToken();
-    const headers = { ...(options.headers || {}) };
+
+    const headers = {
+      ...(options.headers || {})
+    };
 
     if (!(options.body instanceof FormData)) {
       headers['Content-Type'] = 'application/json';
@@ -55,10 +58,7 @@ const API = {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        if (
-          response.status === 401 &&
-          !endpoint.includes('/auth/login')
-        ) {
+        if (response.status === 401) {
           this.clearAuth();
         }
 
@@ -68,9 +68,9 @@ const API = {
       }
 
       return data;
-    } catch (err) {
-      console.error(`API Error [${endpoint}]:`, err);
-      throw err;
+    } catch (error) {
+      console.error(`API Error [${endpoint}]:`, error);
+      throw error;
     }
   },
 
@@ -87,18 +87,16 @@ const API = {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
 
-    const icon =
+    const icon = document.createElement('span');
+    icon.style.fontWeight = '700';
+    icon.textContent =
       type === 'success' ? '✓' :
       type === 'error' ? '✕' : 'ℹ';
 
-    const iconSpan = document.createElement('span');
-    iconSpan.style.fontWeight = '700';
-    iconSpan.textContent = icon;
+    const text = document.createElement('span');
+    text.textContent = message;
 
-    const messageSpan = document.createElement('span');
-    messageSpan.textContent = message;
-
-    toast.append(iconSpan, messageSpan);
+    toast.append(icon, text);
     wrap.appendChild(toast);
 
     setTimeout(() => {
@@ -113,33 +111,30 @@ const API = {
     if (!prefs) return;
 
     const body = document.body;
+    const root = document.documentElement;
 
-    // Theme
     if (prefs.theme === 'light') {
       body.classList.add('light-theme');
     } else {
       body.classList.remove('light-theme');
     }
 
-    // Font family
     if (prefs.font_family) {
-      document.documentElement.style.setProperty(
+      root.style.setProperty(
         '--font-family',
         `'${prefs.font_family}', sans-serif`
       );
     }
 
-    // Font size
     if (prefs.font_size) {
-      document.documentElement.style.setProperty(
+      root.style.setProperty(
         '--font-size',
         `${prefs.font_size}px`
       );
     }
 
-    // Accent color
     if (prefs.accent_color) {
-      document.documentElement.style.setProperty(
+      root.style.setProperty(
         '--primary-blue',
         prefs.accent_color
       );
@@ -147,7 +142,6 @@ const API = {
   }
 };
 
-// Apply saved preferences when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   const user = API.getCurrentUser();
 
