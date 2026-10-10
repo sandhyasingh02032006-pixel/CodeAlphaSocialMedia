@@ -1,0 +1,9 @@
+{
+  "name": "codealpha-social-media-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CodeAlphaSocialMedia Frontend",
+  "scripts": {
+    "start": "echo Frontend is deployed as a static site"
+  }
+}
