@@ -59,7 +59,22 @@ app.get("/api/db-check", async (req, res) => {
         });
     }
 });
+// Temporary demo API for Home Feed
+app.get('/api/stories', (req, res) => {
+  res.json({ success: true, stories: [] });
+});
 
+app.get('/api/posts', (req, res) => {
+  res.json({ success: true, posts: [] });
+});
+
+app.get('/stories', (req, res) => {
+  res.json({ success: true, stories: [] });
+});
+
+app.get('/posts', (req, res) => {
+  res.json({ success: true, posts: [] });
+});
 // Start Server
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
