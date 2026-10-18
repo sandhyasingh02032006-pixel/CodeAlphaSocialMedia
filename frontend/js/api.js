@@ -2,7 +2,7 @@
  * CodeAlphaSocialMedia - API Client
  */
 
-const API_BASE = 'https://codealphasocialmedia.onrender.com/api';
+const API_BASE = 'https://codealphasocialmedia-api.onrender.com/api';
 
 const API = {
     getToken() {
