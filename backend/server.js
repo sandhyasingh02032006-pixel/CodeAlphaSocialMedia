@@ -102,6 +102,47 @@ app.post('/api/auth/login', (req, res) => {
     message: 'Demo login needs token authentication setup'
   });
 });
+// Temporary demo profile API
+app.get('/api/users/:id', (req, res) => {
+  const id = req.params.id;
+
+  const demoUsers = {
+    '1': {
+      id: 1,
+      username: 'alex_codealpha',
+      display_name: 'Alex CodeAlpha',
+      email: 'alex@example.com',
+      bio: 'Welcome to CodeAlphaSocial!',
+      profile_image: '',
+      cover_image: '',
+      is_verified: false
+    },
+    '2': {
+      id: 2,
+      username: 'sarah_designer',
+      display_name: 'Sarah Designer',
+      email: 'sarah@example.com',
+      bio: 'Designer and creator',
+      profile_image: '',
+      cover_image: '',
+      is_verified: false
+    }
+  };
+
+  const user = demoUsers[id];
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: 'User not found'
+    });
+  }
+
+  res.json({
+    success: true,
+    user
+  });
+});
 // Start Server
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
