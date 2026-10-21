@@ -27,8 +27,8 @@ const Profile = {
 
       headerEl.innerHTML = `
         <div style="position: relative; margin-bottom: 50px;">
-          <img src="${user.cover_image || '/src/assets/images/post_skyline_night_1791536884567.jpg'}" style="width: 100%; height: 180px; object-fit: cover; border-radius: var(--radius-lg); border: 1px solid var(--border-color);" />
-          <img src="${user.profile_image || '/src/assets/images/avatar_tech_dev_1791536907315.jpg'}" class="avatar avatar-lg" style="position: absolute; bottom: -40px; left: 24px; background: var(--bg-main);" />
+          <img src="${user.cover_image || '/images/post_skyline_night_1791536884567.jpg'}" style="width: 100%; height: 180px; object-fit: cover; border-radius: var(--radius-lg); border: 1px solid var(--border-color);" />
+          <img src="${user.profile_image ||'/images/avatar_tech_dev_1791536907315.jpg'}" class="avatar avatar-lg" style="position: absolute; bottom: -40px; left: 24px; background: var(--bg-main);" />
         </div>
 
         <div style="padding: 0 10px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
