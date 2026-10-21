@@ -113,6 +113,9 @@ app.get('/api/users/:id', (req, res) => {
       display_name: 'Alex CodeAlpha',
       email: 'alex@example.com',
       bio: 'Welcome to CodeAlphaSocial!',
+        posts_count: 0,
+      followers_count: 0,
+      following_count: 0,
       profile_image: '',
       cover_image: '',
       is_verified: false
