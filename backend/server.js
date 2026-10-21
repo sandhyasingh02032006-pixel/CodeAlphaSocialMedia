@@ -75,6 +75,33 @@ app.get('/stories', (req, res) => {
 app.get('/posts', (req, res) => {
   res.json({ success: true, posts: [] });
 });
+// Temporary demo login route
+app.post('/api/auth/login', (req, res) => {
+  const { identifier, password } = req.body || {};
+
+  const demoUsers = [
+    { username: 'alex_codealpha', email: 'alex@example.com' },
+    { username: 'sarah_designer', email: 'sarah@example.com' },
+    { username: 'david_ml', email: 'david@example.com' },
+    { username: 'elena_art', email: 'elena@example.com' }
+  ];
+
+  const user = demoUsers.find(u =>
+    u.username === identifier || u.email === identifier
+  );
+
+  if (!user || !password) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid demo login details'
+    });
+  }
+
+  return res.status(501).json({
+    success: false,
+    message: 'Demo login needs token authentication setup'
+  });
+});
 // Start Server
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
